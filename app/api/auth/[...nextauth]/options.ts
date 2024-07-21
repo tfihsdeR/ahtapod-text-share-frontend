@@ -69,22 +69,26 @@ export const options: NextAuthOptions = {
                     return false
                 }
                 user.role = createUserRes.user.role!;
+                user.id = createUserRes.user.id!;
             } else {
                 user.role = readUserRes.user.role!;
+                user.id = readUserRes.user.id!;
             }
 
             return true;
         },
         async jwt({ token, user, session }) {
-            if (user && user.role) {
+            if (user && user.role && user.id) {
                 token.role = user.role;
+                token.id = user.id;
             }
 
             return token;
         },
         session: async ({ session, user, token }) => {
-            if (token.role) {
+            if (token.role && token.id) {
                 session.user.role = token.role;
+                session.user.id = token.id;
             }
 
             return session;

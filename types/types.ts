@@ -43,7 +43,9 @@ export interface IPost {
     id?: string;
     title: string;
     content: string;
+    summary: string;
     createdAt?: Date;
     updatedAt?: Date;
     createdBy?: string;
+    createdByName?: string;
 }

@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 import { AppDispatch, RootState } from '@/app/globalRedux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../ui/Loader'
-import { readPosts } from '@/app/globalRedux/features/post'
+import { clearError, readPosts } from '@/app/globalRedux/features/post'
 import PostCard from '../ui/Cards/PostCard'
+import toast from 'react-hot-toast'
 
 const Publication = () => {
     const router = useRouter()
@@ -15,6 +16,13 @@ const Publication = () => {
 
     useEffect(() => {
         dispatch(readPosts())
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+            dispatch(clearError())
+        }
     }, []);
 
     if (loading) {
@@ -23,7 +31,7 @@ const Publication = () => {
 
     return (
         <div className=''>
-            <h1>Publication</h1>
+            <h1>Publications</h1>
 
             <div>
                 {posts && posts.map((post) => (

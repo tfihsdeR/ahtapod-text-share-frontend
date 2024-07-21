@@ -21,6 +21,7 @@ const Post = () => {
         const newPost: IPost = {
             title: formData.get('title') as string,
             content: formData.get('content') as string,
+            summary: formData.get('summary') as string,
         }
 
         dispatch(createPost({ post: newPost }))
@@ -59,6 +60,19 @@ const Post = () => {
                         type='text'
                         placeholder='Title'
                         name='title'
+                    />
+                </div>
+                <div className='mb-4'>
+                    <label className='block text-gray-400 text-sm font-bold mb-2' htmlFor='summary'>
+                        Summary
+                    </label>
+                    <textarea
+                        className='shadow appearance-none border rounded w-full h-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline overflow-hidden'
+                        id='summary'
+                        placeholder='Plesae write a summary of your post. Max 200 characters!'
+                        name='summary'
+                        ref={textareaRef}
+                        maxLength={200}
                     />
                 </div>
                 <div className='mb-6'>
