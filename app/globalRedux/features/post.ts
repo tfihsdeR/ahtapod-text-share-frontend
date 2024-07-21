@@ -112,6 +112,63 @@ export const readPostById = createAsyncThunk(
     }
 )
 
+export const removePostById = createAsyncThunk(
+    'post/removePostById',
+    async ({ id }: { id: string }, { rejectWithValue }) => {
+        try {
+            const options: RequestInit = {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/removeById/${id}`, options)
+
+            const data: IPostReturn = await response.json()
+
+            if (!response.ok) {
+                return rejectWithValue(data.error)
+            }
+
+            return data
+
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+export const updatePostById = createAsyncThunk(
+    'post/updatePostById',
+    async ({ id, post }: { id: string, post: IPost }, { rejectWithValue }) => {
+        try {
+            const options: RequestInit = {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(post),
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/updateById/${id}`, options)
+
+            const data: IPostReturn = await response.json()
+
+            if (!response.ok) {
+                return rejectWithValue(data.error)
+            }
+
+            return data
+
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const postSlice = createSlice({
     name: 'post',
     initialState,
@@ -157,6 +214,32 @@ const postSlice = createSlice({
                 state.post = action.payload.post
             })
             .addCase(readPostById.rejected, (state, action: PayloadAction<any>) => {
+                state.loading = false
+                state.error = action.payload.message
+            })
+
+            // Remove Post By ID
+            .addCase(removePostById.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(removePostById.fulfilled, (state, action: PayloadAction<IPostReturn>) => {
+                state.loading = false
+                state.post = undefined
+            })
+            .addCase(removePostById.rejected, (state, action: PayloadAction<any>) => {
+                state.loading = false
+                state.error = action.payload.message
+            })
+
+            // Update Post By ID
+            .addCase(updatePostById.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(updatePostById.fulfilled, (state, action: PayloadAction<IPostReturn>) => {
+                state.loading = false
+                state.post = action.payload.post
+            })
+            .addCase(updatePostById.rejected, (state, action: PayloadAction<any>) => {
                 state.loading = false
                 state.error = action.payload.message
             })

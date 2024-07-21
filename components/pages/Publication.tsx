@@ -16,31 +16,45 @@ const Publication = () => {
 
     useEffect(() => {
         dispatch(readPosts())
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (error) {
             toast.error(error)
             dispatch(clearError())
         }
-    }, []);
+    }, [error]);
+
+    // useEffect(() => {
+    //     const handleRouteChange = (url: string) => {
+    //         if (url === '/') {
+    //             dispatch(readPosts())
+    //         }
+    //     }
+
+    //     router. events.on('routeChangeComplete', handleRouteChange)
+
+    //     return () => {
+    //         router.events.off('routeChangeComplete', handleRouteChange)
+    //     }
+    // }, [router.events, dispatch]);
 
     if (loading) {
         return <Loader />
     }
 
     return (
-        <div className=''>
-            <h1>Publications</h1>
+        <div className='w-full flex flex-col items-center'>
+            <h1 className='mb-10'>Publications</h1>
 
-            <div>
+            <div className='w-full flex flex-wrap justify-center'>
                 {posts && posts.map((post) => (
                     <PostCard key={post.id} post={post} />
                 ))}
             </div>
 
             <button
-                className="bg-gray-700 rounded-full hover:bg-gray-600 text-white font-bold p-4 fixed right-10 bottom-10"
+                className="bg-gray-700 rounded-full hover:bg-gray-600 text-white font-bold p-7 max-lg:p-4 fixed right-10 bottom-10"
                 onClick={() => router.push('/newPublish')}
             >
                 <FaPlus />

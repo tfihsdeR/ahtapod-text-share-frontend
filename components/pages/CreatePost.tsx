@@ -7,10 +7,12 @@ import { createPost } from '@/app/globalRedux/features/post'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../ui/Loader'
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
-const Post = () => {
+const CreatePost = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const [content, setContent] = useState('')
+    const router = useRouter()
 
     const dispatch = useDispatch<AppDispatch>()
     const { post, error, loading } = useSelector((state: RootState) => state.post)
@@ -25,6 +27,7 @@ const Post = () => {
         }
 
         dispatch(createPost({ post: newPost }))
+        router.push('/')
     }
 
     useLayoutEffect(() => {
@@ -103,4 +106,4 @@ const Post = () => {
     )
 }
 
-export default Post
+export default CreatePost

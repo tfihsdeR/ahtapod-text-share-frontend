@@ -14,38 +14,37 @@ const Modal = ({
     isCreate,
     isEdit,
     isDelete,
-    isApply,
-    isNotAppliedJob,
 }: {
     modalTitle: string;
     isCreate?: boolean;
     isDelete?: boolean;
     isEdit?: boolean;
-    isApply?: boolean;
     value: string;
     action: (formData: FormData) => Promise<void>;
     title?: string;
     closeModal: () => void;
     description?: string;
     badge?: string;
-    isNotAppliedJob?: boolean;
 }) => {
-    const submitHandler = () => {
-        if (isCreate) {
-            toast.success("New New Created");
-        } else if (isEdit) {
-            toast.success("Task Has Been Updated");
-        } else if (isDelete) {
-            toast.success("Tak has been deleted");
-        } else if (isApply) {
-            toast.success("Job has been applied!");
-        }
-        closeModal();
-    };
-
     const [_title, setTitle] = useState(title);
     const [_description, setDescription] = useState(description);
     const [_badge, setBadge] = useState(badge);
+
+    const submitHandler = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+        if (isCreate) {
+            toast.success("New Post Created");
+        } else if (isEdit) {
+            toast.success("Post Has Been Updated");
+        } else if (isDelete) {
+            toast.success("Post Has Been Deleted");
+        }
+
+        await action(formData);
+        closeModal();
+    };
 
     return (
         <div
@@ -58,10 +57,10 @@ const Modal = ({
             >
                 <h2 className="text-xl font-bold mb-4">{modalTitle}</h2>
                 <div className="flex justify-center">
-                    <form action={action} onSubmit={submitHandler}>
+                    <form onSubmit={submitHandler}>
                         <Input
                             type="hidden"
-                            name="taskId"
+                            name="postId"
                             value={value}
                         />
                         {isEdit && (
@@ -69,7 +68,7 @@ const Modal = ({
                                 <Input
                                     type="text"
                                     name="title"
-                                    placeholder="Enter new task title"
+                                    placeholder="Enter new post title"
                                     fullWidth
                                     value={_title}
                                     onChange={(e) => setTitle(e.target.value)}
@@ -90,7 +89,6 @@ const Modal = ({
                                     value={_badge}
                                     onChange={(e) => setBadge(e.target.value)}
                                 />
-
                             </>
                         )}
                         {isCreate && (
@@ -98,7 +96,7 @@ const Modal = ({
                                 <Input
                                     type="text"
                                     name="title"
-                                    placeholder="Enter task title"
+                                    placeholder="Enter post title"
                                     fullWidth
                                 />
                                 <Input
@@ -120,25 +118,6 @@ const Modal = ({
                                 />
                             </>
                         )}
-                        {isApply && (
-                            <>
-                                <Input
-                                    type="hidden"
-                                    name="jobId"
-                                    value={value}
-                                />
-                            </>
-                        )}
-                        {isNotAppliedJob && (
-                            <>
-                                <Input
-                                    type="hidden"
-                                    name="jobId"
-                                    value={value}
-                                />
-                            </>
-                        )}
-
                         <div className="mt-5 flex gap-5">
                             <Button
                                 confirmButton

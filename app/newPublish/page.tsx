@@ -1,10 +1,10 @@
-import Post from '@/components/pages/Post'
+import CreatePost from '@/components/pages/CreatePost'
 import React from 'react'
 
 const NewPublish = () => {
     return (
         <div className='container'>
-            <Post />
+            <CreatePost />
         </div>
     )
 }
