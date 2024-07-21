@@ -13,13 +13,13 @@ const Navbar = () => {
     const { data: session } = useSession();
 
     return (
-        <nav className={`flex w-full py-5 px-8 gap-4 fixed bg-black max-lg:absolute ${isOpen ? 'max-lg:h-screen' : 'max-lg:h-20 h-24 border-b'} transition-all duration-300 ease-in-out`}>
+        <nav className={`flex w-full py-5 px-8 gap-4 fixed bg-black lg:border-b max-lg:absolute ${isOpen ? 'max-lg:h-screen' : 'max-lg:h-20'} transition-all duration-300 ease-in-out`}>
             <div className="flex items-center justify-center gap-10 w-full max-lg:flex-col">
                 <Link href='/' className='absolute left-10 max-sm:left-1 max-lg:top-4'>
                     <Image
-                        src='/next.svg'
-                        width={200}
-                        height={43}
+                        src='/erdinc.png'
+                        width={60}
+                        height={60}
                         alt='Website Logo'
                     />
                 </Link>

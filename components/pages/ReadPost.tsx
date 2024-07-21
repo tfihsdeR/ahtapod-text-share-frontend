@@ -86,7 +86,7 @@ const ReadPost = ({ id }: { id: string }) => {
                                 name="title"
                                 id="title"
                                 placeholder='Title'
-                                defaultValue={title}
+                                defaultValue={post.title}
                                 className={`w-2/3 py-2 px-3 ${isEditing ? 'text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow appearance-none border rounded' : 'bg-transparent text-center text-4xl font-bold'}`}
                                 onChange={(e) => setTitle(e.target.value)}
                                 disabled={!isEditing}
@@ -99,7 +99,7 @@ const ReadPost = ({ id }: { id: string }) => {
                                     name="summary"
                                     id="summary"
                                     placeholder='Summary'
-                                    defaultValue={summary}
+                                    defaultValue={post.summary}
                                     className={`shadow w-full h-16 py-2 px-3 ${isEditing ? 'appearance-none text-gray-700 border rounded leading-tight focus:outline-none focus:shadow-outline overflow-hidden' : 'bg-transparent'}`}
                                     onChange={(e) => setSummary(e.target.value)}
                                     disabled={!isEditing}
@@ -115,6 +115,7 @@ const ReadPost = ({ id }: { id: string }) => {
                                 placeholder='Content'
                                 name="content"
                                 ref={textareaRef}
+                                defaultValue={post.content}
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
                                 disabled={!isEditing}
