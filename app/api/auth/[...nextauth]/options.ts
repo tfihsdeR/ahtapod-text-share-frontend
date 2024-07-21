@@ -73,13 +73,9 @@ export const options: NextAuthOptions = {
                 user.role = readUserRes.user.role!;
             }
 
-            // user.accessToken = account?.access_token
-
             return true;
         },
         async jwt({ token, user, session }) {
-            // console.log("JWTToken_2:", token.accessToken);
-
             if (user && user.role) {
                 token.role = user.role;
             }
@@ -87,8 +83,6 @@ export const options: NextAuthOptions = {
             return token;
         },
         session: async ({ session, user, token }) => {
-            // session.accessToken = token.accessToken;
-
             if (token.role) {
                 session.user.role = token.role;
             }

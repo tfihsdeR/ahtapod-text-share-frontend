@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
+import Publication from '../components/pages/Publication';
 
 export default async function Home() {
     return (
-        <section className="container justify-center">
-            <h1>Home</h1>
+        <section className="container">
+            <Publication />
         </section>
     );
 }

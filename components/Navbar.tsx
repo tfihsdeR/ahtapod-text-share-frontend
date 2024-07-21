@@ -26,14 +26,11 @@ const Navbar = () => {
                 <HamburgerMenu isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} className='z-50 invisible max-lg:visible right-16 max-sm:right-5 top-9 transition-all duration-300 ease-in-out' />
                 <ul className={`flex text-2xl gap-7 max-lg:flex-col items-center ${isOpen ? 'max-lg:flex' : 'max-lg:hidden'}`}>
                     {NavLinks.map((link) => (
-                        <>
-                            <Link href={link.href} key={link.key} onClick={() => setIsOpen(!isOpen)}>
-                                {link.text}
-                            </Link>
-                            {session?.user.role === 'admin' && <Link onClick={() => setIsOpen(false)} href='/dashBoard'>Dashboard</Link>}
-                        </>
+                        <Link href={link.href} key={link.key} onClick={() => setIsOpen(!isOpen)}>
+                            {link.text}
+                        </Link>
                     ))}
-
+                    {session?.user.role === 'admin' && <Link onClick={() => setIsOpen(false)} href='/dashboard'>Dashboard</Link>}
                     <div className='hidden max-lg:flex max-lg:flex-col items-center gap-7'>
                         {session?.user ? (
                             <>

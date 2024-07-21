@@ -1,9 +1,11 @@
 'use client'
 
 import { configureStore, Action, ThunkAction } from "@reduxjs/toolkit"
+import postSlice from "./features/post"
 
 export const store = configureStore({
     reducer: {
+        post: postSlice,
     }
 })
 
