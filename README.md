@@ -63,8 +63,14 @@ Before you begin, make sure you have Node.js installed on your system.
 ## Login User
 - ***I have created an online MongoDb Collection. You will see it env file.***
 - **Admin User**
-    - Email:  ```bash testuser@test.com ```
-    - Password:  ```bash 123456 ```
+    - Email:
+      ```bash
+      testuser@test.com
+      ```
+    - Password:
+      ```bash
+      123456
+      ```
 - **Default User**
     - Just create a new user :)
 
