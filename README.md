@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Getting Started With "Ahtapod Text Share"
 
-## Getting Started
+Welcome to the "Ahtapod Text Share" project! This guide will help you set up and run the frontend and backend parts of the application.
 
-First, run the development server:
+## Prerequisites
+Before you begin, make sure you have [Node.js](https://nodejs.org/) installed on your system.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Running the Backend
+- Open your terminal.
+- Download the backend project
+    - ***git clone https://github.com/tfihsdeR/ahtapod-text-share-backend.git***
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Install the necessary dependencies:
+    - ***npm install***
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ - Start the development server:
+    - ***npm run dev***
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Running the Frontend
+- Open a new terminal window.
+- Download to the frontend directory:
+    - ***git clone https://github.com/tfihsdeR/ahtapod-text-share-frontend.git***
+ 
+- Install any required dependencies:
+    - ***npm install***
+ 
+- Launch the frontend server:
+    - ***npm run dev***
 
-## Learn More
+- Open a Browser
+    - ***Navigate to: http://localhost:3000/***
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Now, both the frontend and backend servers should be running, and you can begin using the rastKanban application.
