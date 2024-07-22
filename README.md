@@ -56,15 +56,15 @@ Before you begin, make sure you have Node.js installed on your system.
     npm run dev
     ```
 6. Open a browser and navigate to:
-    ```
+     ```bash
     http://localhost:3000/
     ```
 
 ## Login User
 - ***I have created an online MongoDb Collection. You will see it env file.***
 - **Admin User**
-    - Email: `testuser@test.com`
-    - Password: `123456`
+    - Email:  ```bash testuser@test.com ```
+    - Password:  ```bash 123456 ```
 - **Default User**
     - Just create a new user :)
 
