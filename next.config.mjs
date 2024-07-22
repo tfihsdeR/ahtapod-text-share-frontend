@@ -25,6 +25,12 @@ const nextConfig = {
                 hostname: 'static.vecteezy.com',
                 port: '',
                 pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'w7.pngwing.com',
+                port: '',
+                pathname: '/**',
             }
         ],
     },

@@ -49,7 +49,7 @@ const SignIn: NextPage = (props): JSX.Element => {
 
                 <div className="flex gap-5 mt-5 justify-center">
                     <Image src="https://e7.pngegg.com/pngimages/704/688/png-clipart-google-google.png" alt="google" width={80} height={80} onClick={() => signIn("google")} className="cursor-pointer bg-transparent rounded-full" style={{ objectFit: 'fill' }} />
-                    <Image src="https://static.vecteezy.com/system/resources/previews/023/986/970/non_2x/linkedin-logo-linkedin-logo-transparent-linkedin-icon-transparent-free-free-png.png" alt='linkedin' width={80} height={80} onClick={() => signIn("linkedin")} className="cursor-pointer bg-transparent rounded-full" style={{ objectFit: 'fill' }} />
+                    <Image src="https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png" alt='github' width={80} height={80} onClick={() => signIn("github")} className="cursor-pointer bg-transparent rounded-full" style={{ objectFit: 'fill' }} />
                 </div>
             </form>
         </div>
