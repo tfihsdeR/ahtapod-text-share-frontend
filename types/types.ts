@@ -3,9 +3,11 @@ export interface IUser {
     id?: string | null;
     email: string | null;
     password?: string | null;
-    name: string | null;
+    name?: string | null;
     createdAt?: Date | null;
     updatedAt?: Date | null;
+    image?: string | null;
+    updatedBy?: string | null;
     role?: string | null;
 }
 
@@ -15,12 +17,7 @@ export type SessionUser = {
     image?: string | null | undefined;
     role?: string | null | undefined;
     accessToken?: string | null | undefined
-} | undefined
-
-export interface IUserResponse {
-    user: IUser,
-    message: string,
-}
+} | undefined;
 
 // Error Types
 export class CustomError extends Error {

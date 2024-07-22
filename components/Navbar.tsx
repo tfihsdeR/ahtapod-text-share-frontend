@@ -38,7 +38,7 @@ const Navbar = () => {
                                 <Link onClick={() => setIsOpen(false)} href='/api/auth/signout'>Sign Out</Link>
                             </>
                         ) : (
-                            <Link onClick={() => setIsOpen(false)} href='/api/auth/signin'>Sign In</Link>
+                            <Link onClick={() => setIsOpen(false)} href='signin'>Sign In</Link>
                         )}
                     </div>
 

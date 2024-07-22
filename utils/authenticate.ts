@@ -1,7 +1,12 @@
+import { IUser } from "@/types/types";
 import { User } from "next-auth";
-import { IUserResponse } from "@/types/types";
 
-export const createUserUtil = async (user: User): Promise<IUserResponse> => {
+interface IUserResponse {
+    user: IUser,
+    success: string,
+}
+
+export const createUserUtil = async (user: User | IUser): Promise<IUserResponse> => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/create`, {
             method: 'POST',
@@ -15,7 +20,7 @@ export const createUserUtil = async (user: User): Promise<IUserResponse> => {
 
         const res: IUserResponse = {
             user: data.user,
-            message: data.message,
+            success: data.status,
         }
 
         return res;
@@ -38,7 +43,7 @@ export const readUserUtil = async (user: User): Promise<IUserResponse> => {
 
         const res: IUserResponse = {
             user: data.user,
-            message: data.message
+            success: data.success
         }
 
         return res;

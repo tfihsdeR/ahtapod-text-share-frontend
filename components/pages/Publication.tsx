@@ -8,11 +8,13 @@ import Loader from '../ui/Loader'
 import { clearError, readPosts } from '@/app/globalRedux/features/post'
 import PostCard from '../ui/Cards/PostCard'
 import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/react'
 
 const Publication = () => {
     const router = useRouter()
     const dispatch = useDispatch<AppDispatch>()
     const { posts, error, loading } = useSelector((state: RootState) => state.post)
+    const { data: session } = useSession()
 
     useEffect(() => {
         dispatch(readPosts())
@@ -24,20 +26,6 @@ const Publication = () => {
             dispatch(clearError())
         }
     }, [error]);
-
-    // useEffect(() => {
-    //     const handleRouteChange = (url: string) => {
-    //         if (url === '/') {
-    //             dispatch(readPosts())
-    //         }
-    //     }
-
-    //     router. events.on('routeChangeComplete', handleRouteChange)
-
-    //     return () => {
-    //         router.events.off('routeChangeComplete', handleRouteChange)
-    //     }
-    // }, [router.events, dispatch]);
 
     if (loading) {
         return <Loader />
@@ -53,12 +41,14 @@ const Publication = () => {
                 ))}
             </div>
 
-            <button
-                className="bg-gray-700 rounded-full hover:bg-gray-600 text-white font-bold p-7 max-lg:p-4 fixed right-10 bottom-10"
-                onClick={() => router.push('/newPublish')}
-            >
-                <FaPlus />
-            </button>
+            {session && (
+                <button
+                    className="bg-gray-700 rounded-full hover:bg-gray-600 text-white font-bold p-7 max-lg:p-4 fixed right-10 bottom-10"
+                    onClick={() => router.push('/newPublish')}
+                >
+                    <FaPlus />
+                </button>
+            )}
         </div>
     )
 }

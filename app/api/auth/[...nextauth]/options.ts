@@ -1,9 +1,9 @@
 import type { NextAuthOptions, User } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import LinkedinProvider from "next-auth/providers/linkedin";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { createUserUtil, readUserUtil } from "@/utils/authenticate";
+import { IUser } from "@/types/types";
 
 export const options: NextAuthOptions = {
     providers: [
@@ -15,36 +15,41 @@ export const options: NextAuthOptions = {
             clientId: process.env.GOOGLE_ID as string,
             clientSecret: process.env.GOOGLE_SECRET as string,
         }),
-        LinkedinProvider({
-            clientId: process.env.LINKEDIN_ID as string,
-            clientSecret: process.env.LINKEDIN_SECRET as string,
-        }),
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
-                userName: {
-                    label: "Username",
-                    type: "text",
-                    placeholder: "Enter your username",
-                },
-                password: {
-                    label: "Password",
-                    type: "password",
-                    placeholder: "Enter your password"
-                }
             },
             async authorize(credentials) {
-                const user = {
-                    id: '42',
-                    name: 'TestUser',
-                    password: 'password'
+                const { email, password } = credentials as { email: string, password: string };
+
+                const newUser: IUser = {
+                    email,
+                    password,
                 }
 
-                if (credentials?.userName === user.name && credentials?.password === user.password) {
-                    return user
-                } else {
-                    return null
+                const readUserRes = await readUserUtil({ email });
+
+                if (!readUserRes.user) {
+                    const createUserRes = await createUserUtil(newUser);
+
+                    if (!createUserRes.user) {
+                        return null;
+                    }
+
+                    return {
+                        email: createUserRes.user.email,
+                        role: createUserRes.user.role!,
+                        name: createUserRes.user.name,
+                        id: createUserRes.user.id!
+                    };
                 }
+
+                return {
+                    email: readUserRes.user.email,
+                    role: readUserRes.user!.role!,
+                    name: readUserRes.user.name,
+                    id: readUserRes.user.id!
+                };
             }
         })
     ],
@@ -56,7 +61,7 @@ export const options: NextAuthOptions = {
     },
     callbacks: {
         async redirect({ url, baseUrl }) {
-            return url
+            return baseUrl
         },
         async signIn({ user, account, profile }) {
             const readUserRes = await readUserUtil(user);
@@ -97,6 +102,9 @@ export const options: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: "jwt",
+    },
+    pages: {
+        signIn: "/signin",
     },
     debug: true,
 }

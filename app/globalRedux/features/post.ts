@@ -55,7 +55,6 @@ export const createPost = createAsyncThunk(
     }
 )
 
-
 export const readPosts = createAsyncThunk(
     'post/readPosts',
     async (_, { rejectWithValue }) => {
